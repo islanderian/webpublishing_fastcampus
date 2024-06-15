@@ -158,3 +158,20 @@ main {
   transition: transform 0.25s ease;
   transform: scale(0.5);
 }
+
+#floating-map-button {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  background-color: #222222;
+  border-radius: 24px;
+  bottom: 125px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+}
