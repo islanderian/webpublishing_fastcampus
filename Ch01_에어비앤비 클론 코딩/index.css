@@ -8,6 +8,8 @@ header {
   align-items: center;
   padding: 0 10px;
   height: 80px;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 10px;
 }
 
 #logo {
@@ -83,4 +85,76 @@ header {
   border-radius: 21px;
   padding: 5px 5px 5px 12px;
   gap: 12px;
+}
+#category-bar {
+  display: flex;
+  gap: 32px;
+  padding: 20px 40px;
+  overflow: auto;
+}
+.category-button {
+  color: #717171;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.category-button img {
+  width: 24px;
+}
+.category-button:hover {
+  color: #000000;
+  border-bottom: 2px solid #dddddd;
+}
+
+.place-image-wrapper {
+  position: relative;
+  width: 308px;
+  height: 293px;
+  overflow: hidden;
+  border-radius: 23px;
+}
+.place-image-wrapper img {
+  width: 500px;
+  height: 500px;
+}
+.place-image-wrapper .heart-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.description-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 13px;
+  gap: 3px;
+  color: rgb(34, 34, 34);
+  font-size: 15px;
+}
+
+.description-section_title {
+  font-weight: 600;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 24px 80px;
+}
+
+#place-items-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 308px);
+  justify-items: center;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 40px 24px;
+}
+
+.heart-icon:active {
+  transition: transform 0.25s ease;
+  transform: scale(0.5);
 }
