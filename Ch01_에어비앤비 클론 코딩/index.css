@@ -4,6 +4,10 @@ button {
 }
 header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  height: 80px;
 }
 
 #logo {
@@ -26,10 +30,11 @@ header {
   display: block;
   flex-shrink: 0;
   padding: 0 16px;
-  white-space: nowrap;
+  white-space: nowrap; /*텍스트 줄바꿈 되지 않도록*/
   font-size: 14px;
   font-weight: 600;
   color: rgb(34, 34, 34);
+  cursor: pointer;
 }
 .little-search_button:nth-of-type(3) {
   color: #717171;
@@ -53,4 +58,29 @@ header {
 }
 #magnifying-glass-icon {
   width: 12px;
+}
+#do-airbnb {
+  font-size: 14px;
+  padding: 12px;
+  color: #222222;
+  font-weight: 600;
+  border-radius: 22px;
+  cursor: pointer;
+}
+
+#do-airbnb:hover {
+  background-color: #f7f7f7;
+}
+
+#header-right-section {
+  display: flex;
+}
+
+#profile-section {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
+  border-radius: 21px;
+  padding: 5px 5px 5px 12px;
+  gap: 12px;
 }
