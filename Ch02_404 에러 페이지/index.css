@@ -85,6 +85,7 @@ body {
 #planet_1 {
   animation-name: rotation;
   animation-duration: 3s;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
   transform-box: fill-box;
   transform-origin: center;
@@ -117,6 +118,7 @@ body {
 #alien_hand-L,
 #alien_hand-R {
   animation: shakingUpAndDown 1s infinite;
+  animation-timing-function: cubic-bezier(0.18, 0.82, 0.63, -0.04);
 }
 #number-0-soaking {
   animation: soaking 2s;
