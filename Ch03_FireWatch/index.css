@@ -1,29 +1,45 @@
-#parallax-wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-  perspective: 1px;
+@import url("../reset.css");
+
+body {
+  height: 200vh;
+  background-color: #00110c;
 }
 
-.parallax {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+a {
+  text-decoration: none;
 }
 
-#parallax-A {
-  background-color: red;
-  height: 150rem;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 34px;
+  background-color: #04120c;
 }
-#parallax-B {
-  background-color: aqua;
-  height: 500px;
-  transform: translateZ(-2px);
+
+.button-in-header {
+  display: flex;
+  align-items: center;
+  color: #b8e1ee;
+  font-weight: 700;
+  height: 100%;
+  padding: 0 10px;
 }
-/* 앞에 있는 게 더 빨리 변형됨 */
-#parallax-C {
-  top: 300px;
-  background-color: blue;
-  height: 500px;
-  transform: translateZ(-1px);
+.button-in-header:hover {
+  background-color: #127374;
+}
+#right-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+#active-menu {
+  background-color: #013a3b;
+}
+
+#image-wrapper {
+  min-width: 1000px;
+  overflow: hidden;
 }
