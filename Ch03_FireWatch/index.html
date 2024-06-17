@@ -8,16 +8,12 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="div-1">1</div>
-    <div id="div-2">2</div>
+    <div id="parallax-wrapper">
+      <div id="parallax-A" class="parallax">A</div>
+      <div id="parallax-B" class="parallax">B</div>
+      <div id="parallax-C" class="parallax">C</div>
+    </div>
   </body>
 
-  <script>
-    const div1 = document.querySelector("#div-1");
-
-    window.addEventListener("scroll", () => {
-      // scroll 속도보다 2배 빠르게 이동
-      div1.style.transform = `translateY(${window.scrollY * 2}px)`;
-    });
-  </script>
+  <script></script>
 </html>

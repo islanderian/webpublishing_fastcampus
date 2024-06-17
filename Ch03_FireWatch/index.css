@@ -1,14 +1,29 @@
-body {
-  height: 200vh;
+#parallax-wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  perspective: 1px;
 }
 
-div {
-  height: 100px;
+.parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
-#div-1 {
+#parallax-A {
   background-color: red;
+  height: 150rem;
 }
-#div-2 {
+#parallax-B {
+  background-color: aqua;
+  height: 500px;
+  transform: translateZ(-2px);
+}
+/* 앞에 있는 게 더 빨리 변형됨 */
+#parallax-C {
+  top: 300px;
   background-color: blue;
+  height: 500px;
+  transform: translateZ(-1px);
 }
