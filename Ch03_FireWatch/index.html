@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../reset.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div-1">1</div>
+    <div id="div-2">2</div>
+  </body>
+
+  <script>
+    const div1 = document.querySelector("#div-1");
+
+    window.addEventListener("scroll", () => {
+      // scroll 속도보다 2배 빠르게 이동
+      div1.style.transform = `translateY(${window.scrollY * 2}px)`;
+    });
+  </script>
+</html>
