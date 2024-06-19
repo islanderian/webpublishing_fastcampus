@@ -1740,5 +1740,16 @@
           element.setAttribute("id", "active-menu");
         });
       });
+
+    // 스크롤 부드럽게 이동하도록 구현하는 부분
+    const link = document.querySelector(`a[href="#document-title"]`);
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // 해당 element 로 부드럽게 이동
+      document.querySelector("#document-title").scrollIntoView({
+        behavior: "smooth",
+      });
+    });
   </script>
 </html>

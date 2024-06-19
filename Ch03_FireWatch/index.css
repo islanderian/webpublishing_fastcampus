@@ -1,5 +1,10 @@
 @import url("../reset.css");
 
+html {
+  /* 스크롤 동작 부드럽게 */
+  /* scroll-behavior: smooth; */
+}
+
 body {
   height: 200vh;
   background-color: #00110c;
