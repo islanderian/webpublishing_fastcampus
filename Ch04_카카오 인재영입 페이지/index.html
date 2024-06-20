@@ -85,14 +85,23 @@
       <li class="list-item">치킨</li>
       <li class="list-item">26주 적금</li>
     </ul>
+    <main>
+      <section id="panel1-img">
+        <img id="flying-santa-image" src="./imgs/santa_flying.png" alt="" />
+      </section>
+    </main>
   </body>
   <script>
+    // 스크롤에 따라 리스트 색상 변화
     const listStyleChangeStartY = 600;
     const listStyleChangeEndY = 2700;
 
     const listItems = document.querySelectorAll(".list-item");
     const division =
       (listStyleChangeEndY - listStyleChangeStartY) / listItems.length;
+
+    const panel1Img = document.querySelector("#panel1-img");
+    const flyingSantaImage = document.querySelector("#flying-santa-image");
 
     window.addEventListener("scroll", () => {
       if (document.getElementById("on")) {
@@ -108,6 +117,31 @@
         );
 
         if (listItems[targetIndex]) listItems[targetIndex].id = "on";
+      }
+
+      // 스크롤 하단부 높이 = 스크롤 높이 + 화면의 높이
+      const scrollYBottom =
+        window.scrollY + document.documentElement.clientHeight;
+
+      // 스크롤 하단부의 높이가 이미지 패널의 상단을 넘어설 때
+      if (
+        scrollYBottom > panel1Img.offsetTop &&
+        scrollYBottom < panel1Img.offsetTop + panel1Img.offsetHeight
+      ) {
+        const translateX =
+          80 -
+          (80 * (scrollYBottom - panel1Img.offsetTop)) / panel1Img.offsetHeight;
+
+        const translateY =
+          -13 +
+          (13 * (scrollYBottom - panel1Img.offsetTop)) / panel1Img.offsetHeight;
+
+        const rotationDegree =
+          23 -
+          (23 * 1.7 * (scrollYBottom - panel1Img.offsetTop)) /
+            panel1Img.offsetHeight;
+
+        flyingSantaImage.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotationDegree}deg)`;
       }
     });
   </script>
