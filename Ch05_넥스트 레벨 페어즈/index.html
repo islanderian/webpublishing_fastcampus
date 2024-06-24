@@ -15,6 +15,12 @@
         <span class="cursor_trace_inner"></span>
       </div>
     </div>
+    <section class="preloader shown-area">
+      <button class="preloader_btn">
+        <span class="preloader_btn_hold">Hold</span>
+      </button>
+    </section>
+    <section class="header hidden-area">Header</section>
   </body>
   <script>
     document.addEventListener("mousemove", (e) => {
@@ -55,6 +61,55 @@
 
     document.addEventListener("click", (e) => {
       createRipple(e);
+    });
+
+    const preloaderBtn = document.querySelector(".preloader_btn");
+    const preloaderHold = document.querySelector(".preloader_btn_hold");
+
+    let intervalId = null;
+    let scale = 1;
+
+    // opacity 의 threshold
+    const preloaderHideThreshold = 18;
+
+    function setPreloaderStyle(scale) {
+      preloaderBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      preloaderHold.style.opacity = 1 - (scale - 1) / preloaderHideThreshold;
+    }
+
+    preloaderBtn.addEventListener("mousedown", () => {
+      intervalId = setInterval(() => {
+        scale += 0.175;
+
+        setPreloaderStyle(scale);
+
+        // 특정 threshold 이상 지났을 때
+        if (scale >= 1 + preloaderHideThreshold) {
+          const header = document.querySelector(".header");
+
+          document.querySelector(".preloader").classList.add("hidden-area");
+
+          // 숨어 있던 header 등장 시키기
+          header.classList.remove("hidden-area");
+          header.classList.add("shown-area");
+
+          clearInterval(intervalId);
+        }
+      }, 10);
+    });
+
+    preloaderBtn.addEventListener("mouseup", () => {
+      clearInterval(intervalId);
+
+      intervalId = setInterval(() => {
+        scale -= 0.075;
+
+        if (scale > 1) {
+          setPreloaderStyle(scale);
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 10);
     });
   </script>
 </html>

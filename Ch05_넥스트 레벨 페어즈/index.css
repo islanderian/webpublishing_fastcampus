@@ -3,17 +3,28 @@
 body {
   /* 기본 커서를 없애고, 만든 커서만 보이도록 */
   cursor: none !important;
+  background-color: #1e4029;
+}
+
+.shown-area {
+  display: block;
+  opacity: 1;
+}
+.hidden-area {
+  display: none;
+  opacity: 0;
 }
 
 /* 커서 영역은 화면 전체로 고정 */
 .cursor {
   position: fixed;
-  background-color: tomato;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 99999;
+  /* 맨 위 레이어에 있으므로, 다른 element 의 마우스 이벤트가 실행되지 않아서 cusor의 마우스 이벤트는 끈다. */
+  pointer-events: none;
 }
 
 /* 커서 : 자바스크립트로 커서를 이동시킴 */
@@ -70,4 +81,32 @@ body {
   /* 애니메이션 끝난 후 그 지점에 그대로 */
   animation-fill-mode: forwards;
   z-index: -1;
+}
+
+.preloader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #521714;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.preloader_btn {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: none;
+  color: rgb(213, 165, 78);
+  background-color: rgb(30, 64, 41);
+  transform: translate(-50%, -50%);
+}
+.preloader_btn_hold {
+  font-size: 19px;
+  line-height: 20px;
+  font-weight: 800;
+  letter-spacing: normal;
 }
