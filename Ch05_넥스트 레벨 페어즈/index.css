@@ -1,0 +1,45 @@
+@import url("../reset.css");
+
+body {
+  /* 기본 커서를 없애고, 만든 커서만 보이도록 */
+  cursor: none !important;
+}
+
+/* 커서 영역은 화면 전체로 고정 */
+.cursor {
+  position: fixed;
+  background-color: tomato;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+}
+
+/* 커서 : 자바스크립트로 커서를 이동시킴 */
+.cusor_default_inner {
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(10, 27, 16, 2.5);
+  border: 2px solid #d5a54e;
+  border-radius: 50%;
+  /* 요소의 중앙 정렬, 안하면 마우스 포인터 정중앙으로 오지 않음 */
+  transform: translate(-50%, -50%);
+}
+.cursor_trace_inner {
+  position: absolute;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%);
+  /* 포인터 회색영역 천천히 따라오는 애니메이션 */
+  transition: all 0.04s ease;
+}
+.cusor--active .cursor_trace_inner {
+  transform: scale(0.5) translate(-100%, -100%);
+  transition: all 0.3s ease;
+}
