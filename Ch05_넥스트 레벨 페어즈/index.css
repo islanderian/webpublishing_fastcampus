@@ -43,3 +43,31 @@ body {
   transform: scale(0.5) translate(-100%, -100%);
   transition: all 0.3s ease;
 }
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(5);
+  }
+  100% {
+    transform: scale(10);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #d5a54e;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.5s ease-out;
+  /* 애니메이션 끝난 후 그 지점에 그대로 */
+  animation-fill-mode: forwards;
+  z-index: -1;
+}

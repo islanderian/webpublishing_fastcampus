@@ -36,5 +36,25 @@
     document.addEventListener("mouseup", () => {
       cursor.classList.remove("cusor--active");
     });
+
+    function createRipple(e) {
+      let ripple = document.createElement("span");
+
+      ripple.classList.add("ripple");
+
+      cursor.appendChild(ripple);
+
+      ripple.style.top = e.clientY + "px";
+      ripple.style.left = e.clientX + "px";
+
+      // 애니메이션 끝난 후 ripple 엘리먼트 제거
+      ripple.addEventListener("animationend", () => {
+        cursor.removeChild(ripple);
+      });
+    }
+
+    document.addEventListener("click", (e) => {
+      createRipple(e);
+    });
   </script>
 </html>
