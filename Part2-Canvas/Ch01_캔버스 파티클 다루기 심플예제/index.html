@@ -8,6 +8,22 @@
   </head>
   <body>
     <canvas></canvas>
+    <svg>
+      <!-- defs는 재사용 요소 정의 할 수 있음 -->
+      <defs>
+        <filter id="gooey">
+          <feGaussianBlur stdDeviation="40" in="SourceGraphic" result="blur1" />
+          <feColorMatrix
+            in="blur1"
+            type="matrix"
+            values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 100 -23"
+          />
+        </filter>
+      </defs>
+    </svg>
     <script src="./index.js"></script>
   </body>
 </html>

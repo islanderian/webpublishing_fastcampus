@@ -6,5 +6,7 @@ body {
 }
 
 canvas {
-  background-color: #f1f1f1;
+  /* gooey 이펙트 */
+  /* filter: blur(50px) contrast(50); */
+  filter: url("#gooey");
 }
