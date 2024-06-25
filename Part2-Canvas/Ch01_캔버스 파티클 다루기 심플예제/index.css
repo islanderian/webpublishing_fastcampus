@@ -1,0 +1,10 @@
+@import url("../reset.css");
+
+html,
+body {
+  overflow: hidden;
+}
+
+canvas {
+  background-color: orange;
+}
