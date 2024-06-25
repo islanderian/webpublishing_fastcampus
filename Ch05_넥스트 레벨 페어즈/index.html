@@ -227,6 +227,7 @@
       observer.observe(poster);
     });
 
+    // 마우스 움직에 따라 이미지 움직이기
     const posterParallax = document.querySelector(".poster_parallax");
     posterParallax.addEventListener("mousemove", (e) => {
       const xRelativeToPosterParallax = e.clientX / posterParallax.clientWidth;
