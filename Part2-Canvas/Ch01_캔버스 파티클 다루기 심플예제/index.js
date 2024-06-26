@@ -18,6 +18,51 @@ canvas.height = canvasHeight * dpr;
 ctx.scale(dpr, dpr);
 // //////////////////////////////////////
 
+// dot gui 사용하기
+const feGaussianBlur = document.querySelector("feGaussianBlur");
+const feColorMatrix = document.querySelector("feColorMatrix");
+
+// dot gui controler
+const controls = new (function () {
+  this.blurValue = 40;
+  this.alphaChannel = 100;
+  this.alphaOffset = -23;
+  this.acc = 1.03;
+})();
+
+// dot gui 생성
+let gui = new dat.GUI();
+// 폴더
+const f1 = gui.addFolder("Gooey Effect");
+const f2 = gui.addFolder("Particle Property");
+
+// 폴더 열어두기
+f1.open();
+f2.open();
+
+// 설정 변경할 값들 추가
+f1.add(controls, "blurValue", 0, 100).onChange((value) => {
+  feGaussianBlur.setAttribute("stdDeviation", value);
+});
+f1.add(controls, "alphaChannel", 1, 200).onChange((value) => {
+  feColorMatrix.setAttribute(
+    "values",
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${value} ${controls.alphaOffset}`
+  );
+});
+f1.add(controls, "alphaOffset", -40, 40).onChange((value) => {
+  feColorMatrix.setAttribute(
+    "values",
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${controls.alphaChannel} ${value}`
+  );
+});
+// add 의 5번째 인자는 조절할 단위 (여기선 소수점 두번째자리 단위로 조절 한다는 뜻)
+f2.add(controls, "acc", 1, 1.5, 0.01).onChange((value) => {
+  particles.forEach((particle) => {
+    particle.acc = value;
+  });
+});
+
 class Particle {
   constructor(x, y, radius, vy) {
     this.x = x;
