@@ -1,8 +1,12 @@
 import CanvasOption from "./js/CanvasOption.js";
+import Particle from "./js/Particle.js";
+import { randomNumBetween } from "./js/utils.js";
 
 class Canvas extends CanvasOption {
   constructor() {
     super();
+
+    this.particles = [];
   }
 
   init() {
@@ -12,8 +16,23 @@ class Canvas extends CanvasOption {
     this.canvas.height = this.canvasHeight * this.dpr;
     this.ctx.scale(this.dpr, this.dpr);
 
-    this.canvas.style.width = canvasWidth + "px";
-    this.canvas.style.height = canvasHeight + "px";
+    this.canvas.style.width = this.canvasWidth + "px";
+    this.canvas.style.height = this.canvasHeight + "px";
+
+    this.createParticles();
+  }
+
+  createParticles() {
+    const PARTICLE_NUM = 2000;
+    const x = randomNumBetween(0, this.canvasWidth);
+    const y = randomNumBetween(0, this.canvasHeight);
+
+    for (let i = 0; i < PARTICLE_NUM; i++) {
+      const vx = randomNumBetween(-5, 5);
+      const vy = randomNumBetween(-5, 5);
+
+      this.particles.push(new Particle(x, y, vx, vy));
+    }
   }
 
   render() {
@@ -26,10 +45,23 @@ class Canvas extends CanvasOption {
       now = Date.now();
       delta = now - then;
       if (delta < this.interval) return;
-      // 이곳부터 작성
-      this.ctx.fillRect(100, 100, 200, 200);
 
-      ////////////////
+      // canvas 초기화 (안하면 계속 이어져서 그려짐)
+      this.ctx.fillStyle = this.bgColor;
+      this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+      // 그리는 부분  ///////////////////////
+      this.particles.forEach((particle, index) => {
+        particle.update();
+        particle.draw();
+
+        // opacity 0 이하(화면에서 안보이는) Particle 배열에서 없애기
+        if (particle.opacity < 0) {
+          this.particles.splice(index, 1);
+        }
+      });
+
+      ////////////////////////////////////
       then = now - (delta % this.interval);
     };
     requestAnimationFrame(frame);

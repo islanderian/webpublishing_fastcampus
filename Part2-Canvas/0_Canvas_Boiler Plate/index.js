@@ -12,8 +12,8 @@ class Canvas extends CanvasOption {
     this.canvas.height = this.canvasHeight * this.dpr;
     this.ctx.scale(this.dpr, this.dpr);
 
-    this.canvas.style.width = canvasWidth + "px";
-    this.canvas.style.height = canvasHeight + "px";
+    this.canvas.style.width = this.canvasWidth + "px";
+    this.canvas.style.height = this.canvasHeight + "px";
   }
 
   render() {
