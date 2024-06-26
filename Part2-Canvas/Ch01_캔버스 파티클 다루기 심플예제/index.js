@@ -4,19 +4,38 @@ const ctx = canvas.getContext("2d");
 // CSS 1px 그릴 때 사용되는 장치의 px 수, 맥북은 2
 const dpr = window.devicePixelRatio;
 
-const canvasWidth = innerWidth;
-const canvasHeight = innerHeight;
+let canvasWidth;
+let canvasHeight;
+let particles;
 
-// 레티나에서 더 선명하게 Canvas 조정 ////////////////
-// canvas 의 실제 크기와 CSS 에서의 크기를 같게 맞춰주어야 함
-canvas.style.width = canvasWidth + "px";
-canvas.style.height = canvasHeight + "px";
+function init() {
+  canvasWidth = innerWidth;
+  canvasHeight = innerHeight;
 
-// dpr 1이 아닌 기기에서 더 선명하게 보이도록 처리
-canvas.width = canvasWidth * dpr;
-canvas.height = canvasHeight * dpr;
-ctx.scale(dpr, dpr);
-// //////////////////////////////////////
+  // 레티나에서 더 선명하게 Canvas 조정 ////////////////
+  // canvas 의 실제 크기와 CSS 에서의 크기를 같게 맞춰주어야 함
+  canvas.style.width = canvasWidth + "px";
+  canvas.style.height = canvasHeight + "px";
+
+  // dpr 1이 아닌 기기에서 더 선명하게 보이도록 처리
+  canvas.width = canvasWidth * dpr;
+  canvas.height = canvasHeight * dpr;
+  ctx.scale(dpr, dpr);
+
+  particles = [];
+  const TOTAL = canvasWidth / 30;
+
+  for (let i = 0; i < TOTAL; i++) {
+    const x = randomNumBetween(0, canvasWidth);
+    const y = randomNumBetween(0, canvasHeight);
+    const radius = randomNumBetween(50, 100);
+    const vy = randomNumBetween(1, 5);
+
+    const particle = new Particle(x, y, radius, vy);
+    particles.push(particle);
+  }
+  // //////////////////////////////////////
+}
 
 // dot gui 사용하기
 const feGaussianBlur = document.querySelector("feGaussianBlur");
@@ -86,21 +105,10 @@ class Particle {
 }
 
 // 5개의 랜덤 Particle 생성
-const TOTAL = 20;
+
 const randomNumBetween = (min, max) => {
   return Math.random() * (max - min + 1) + min;
 };
-
-let particles = [];
-for (let i = 0; i < TOTAL; i++) {
-  const x = randomNumBetween(0, canvasWidth);
-  const y = randomNumBetween(0, canvasHeight);
-  const radius = randomNumBetween(50, 100);
-  const vy = randomNumBetween(1, 5);
-
-  const particle = new Particle(x, y, radius, vy);
-  particles.push(particle);
-}
 
 // 주파수 다른 사양의 기기에서도 동일하게 애니메이션을 적용하기 위한 코드
 const fps = 60;
@@ -137,4 +145,11 @@ function animate() {
   then = now - (delta % interval);
 }
 
-animate();
+// 처음 load 되었을 때
+window.addEventListener("load", () => {
+  init();
+  animate();
+});
+
+// resize 되었을 때
+window.addEventListener("resize", init);
