@@ -21,15 +21,41 @@ function render() {
   let now, delta;
   let then = Date.now();
 
+  const x = innerWidth / 2;
+  let y = innerHeight / 2;
+  let widthAlpha = 0;
+  const width = 50;
+  const height = 50;
+  let deg = 0.1;
+
   const frame = () => {
     requestAnimationFrame(frame);
     now = Date.now();
     delta = now - then;
     if (delta < interval) return;
 
-    // 테스트 그리기
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    widthAlpha += 0.1;
+    deg += 0.1;
+    y += 1;
+
+    // 기본 rotate 를 하면 캔버스 (0, 0)을 중심축으로 회전함
+    ctx.translate(x + width, y + height); // 회전 시키고자 하는 객체의 중심축으로 이동
+    ctx.rotate(deg);
+    ctx.translate(-(x + width), -(y + height)); // 중심축 원위치
+
     ctx.fillStyle = "red";
-    ctx.fillRect(200, 200, 50, 50);
+    ctx.fillRect(
+      x,
+      y,
+      width * Math.cos(widthAlpha),
+      height * Math.sin(widthAlpha)
+    );
+    // ctx.fillRect(x, y, width, height);
+
+    ctx.resetTransform(); // rotate 값이 누적해서 더해지지 않도록
+    ctx.scale(dpr, dpr); // resetTransform 해주기 때문에 scale 도 같이 풀림. dpr 위해 다시 scaling
 
     then = now - (delta % interval);
   };
