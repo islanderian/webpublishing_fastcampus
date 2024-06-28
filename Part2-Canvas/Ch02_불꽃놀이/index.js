@@ -1,6 +1,6 @@
 import CanvasOption from "./js/CanvasOption.js";
 import Particle from "./js/Particle.js";
-import { randomNumBetween } from "./js/utils.js";
+import { hypotenuse, randomNumBetween } from "./js/utils.js";
 
 class Canvas extends CanvasOption {
   constructor() {
@@ -23,15 +23,21 @@ class Canvas extends CanvasOption {
   }
 
   createParticles() {
-    const PARTICLE_NUM = 2000;
+    const PARTICLE_NUM = 400;
     const x = randomNumBetween(0, this.canvasWidth);
     const y = randomNumBetween(0, this.canvasHeight);
 
     for (let i = 0; i < PARTICLE_NUM; i++) {
-      const vx = randomNumBetween(-5, 5);
-      const vy = randomNumBetween(-5, 5);
+      // 원 모양으로 생성
+      const r =
+        randomNumBetween(2, 100) * hypotenuse(innerWidth, innerHeight) * 0.0001; // 반지름 범위
+      const angle = (Math.PI / 180) * randomNumBetween(0, 360);
 
-      this.particles.push(new Particle(x, y, vx, vy));
+      const vx = r * Math.cos(angle);
+      const vy = r * Math.sin(angle);
+      const opacity = randomNumBetween(0.6, 0.9);
+
+      this.particles.push(new Particle(x, y, vx, vy, opacity));
     }
   }
 
@@ -47,7 +53,7 @@ class Canvas extends CanvasOption {
       if (delta < this.interval) return;
 
       // canvas 초기화 (안하면 계속 이어져서 그려짐)
-      this.ctx.fillStyle = this.bgColor;
+      this.ctx.fillStyle = this.bgColor + "20"; // #00000020 , rgba 에서 마지막 alpha 값
       this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 
       // 그리는 부분  ///////////////////////
