@@ -1,3 +1,5 @@
+import Background from "./Background.js";
+
 export default class App {
   static canvas = document.querySelector("canvas");
   static ctx = App.canvas.getContext("2d");
@@ -8,6 +10,12 @@ export default class App {
   static height = 768;
 
   constructor() {
+    this.backgrounds = [
+      new Background({ img: document.querySelector("bg3-image"), speed: -1 }),
+      new Background({ img: document.querySelector("bg2-image"), speed: -1 }),
+      new Background({ img: document.querySelector("bg1-image"), speed: -1 }),
+    ];
+
     // addEventListener 에서 bind(this) 를 안하면 window 로 this가 바인딩 됨. App으로 바인딩 유지되도록
     window.addEventListener("resize", this.resize.bind(this));
   }
@@ -33,9 +41,13 @@ export default class App {
       delta = now - then;
       if (delta < App.interval) return;
 
-      App.ctx.clearRect(0, 0, App.width, App.height);
-      App.ctx.fillStyle = "white";
-      App.ctx.fillRect(50, 50, 100, 100);
+      this.backgrounds.forEach((background) => {
+        background.update();
+        background.draw();
+      });
+
+      this.background.update();
+      this.background.draw();
 
       then = now - (delta % App.interval);
     };
