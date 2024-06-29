@@ -27,9 +27,9 @@ function init() {
   // });
 }
 
-function confetti({ x, y, count, deg, colors }) {
+function confetti({ x, y, count, deg, colors, shapes, spread }) {
   for (let i = 0; i < count; i++)
-    particles.push(new Particle(x, y, deg, colors));
+    particles.push(new Particle(x, y, deg, colors, shapes, spread));
 }
 
 function render() {
@@ -56,6 +56,20 @@ function render() {
       }
     }
 
+    confetti({
+      x: 0, // 0 ~ 1
+      y: 0.5, // 0 ~ 1
+      count: 5,
+      deg: -50,
+    });
+
+    confetti({
+      x: 1, // 0 ~ 1
+      y: 0.5, // 0 ~ 1
+      count: 5,
+      deg: -130,
+    });
+
     then = now - (delta % interval);
   };
   requestAnimationFrame(frame); // frame 최초 실행
@@ -72,6 +86,7 @@ window.addEventListener("click", () => {
     y: 0.5, // 0 ~ 1
     count: 10,
     deg: -50,
-    colors: ["FF0000"],
+    // shapes: ["circle"],
+    spread: 1,
   });
 });
