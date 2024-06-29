@@ -1,9 +1,9 @@
-import { randomNumBetween } from "./utils.js";
+import { hexToRgb, randomNumBetween } from "./utils.js";
 
 export default class Particle {
-  constructor(x, y, deg = 0) {
-    this.x = x;
-    this.y = y;
+  constructor(x, y, deg = 0, colors) {
+    this.x = x * innerWidth;
+    this.y = y * innerHeight;
     this.angle = (Math.PI / 180) * randomNumBetween(deg - 30, deg + 30);
     this.r = randomNumBetween(30, 100);
 
@@ -13,8 +13,22 @@ export default class Particle {
     this.friction = 0.89;
     this.gravity = 0.5;
 
-    this.width = 30;
-    this.height = 30;
+    this.width = 12;
+    this.height = 12;
+
+    this.opacity = 1;
+
+    this.widthDelta = randomNumBetween(0, 360);
+    this.heightDelta = randomNumBetween(0, 360);
+
+    this.rotation = randomNumBetween(0, 360);
+    this.rotationDelta = randomNumBetween(-1, 1);
+
+    this.colors = colors || ["#FF577F", "#FF884B", "#FFD384", "#FFF9B0"];
+
+    this.color = hexToRgb(
+      this.colors[Math.floor(randomNumBetween(0, this.colors.length - 1))]
+    );
   }
   update() {
     this.vy += this.gravity;
@@ -24,9 +38,29 @@ export default class Particle {
 
     this.x += this.vx;
     this.y += this.vy;
+
+    this.opacity -= 0.005;
+
+    this.widthDelta += 2;
+    this.heightDelta += 2;
+
+    this.rotation += this.rotationDelta;
   }
   draw(ctx) {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // 회전 이동시켜서 자연스럽게
+    ctx.translate(this.x + this.width * 2, this.y + this.height * 2);
+    ctx.rotate((Math.PI / 180) * this.rotation);
+    ctx.translate(-(this.x + this.width), -(this.y + this.height));
+
+    ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity})`;
+    ctx.fillRect(
+      this.x,
+      this.y,
+      this.width * Math.cos((Math.PI / 180) * this.widthDelta),
+      this.height * Math.sin((Math.PI / 180) * this.heightDelta)
+    );
+
+    // transform 초기화
+    ctx.resetTransform();
   }
 }
