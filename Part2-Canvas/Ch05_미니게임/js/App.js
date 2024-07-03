@@ -11,9 +11,9 @@ export default class App {
 
   constructor() {
     this.backgrounds = [
-      new Background({ img: document.querySelector("bg3-image"), speed: -1 }),
-      new Background({ img: document.querySelector("bg2-image"), speed: -1 }),
-      new Background({ img: document.querySelector("bg1-image"), speed: -1 }),
+      new Background({ img: document.querySelector("#bg3-img"), speed: -1 }),
+      new Background({ img: document.querySelector("#bg2-img"), speed: -2 }),
+      new Background({ img: document.querySelector("#bg1-img"), speed: -4 }),
     ];
 
     // addEventListener 에서 bind(this) 를 안하면 window 로 this가 바인딩 됨. App으로 바인딩 유지되도록
@@ -45,9 +45,6 @@ export default class App {
         background.update();
         background.draw();
       });
-
-      this.background.update();
-      this.background.draw();
 
       then = now - (delta % App.interval);
     };
