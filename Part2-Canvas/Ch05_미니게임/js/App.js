@@ -1,4 +1,5 @@
 import Background from "./Background.js";
+import Wall from "./Wall.js";
 
 export default class App {
   static canvas = document.querySelector("canvas");
@@ -16,6 +17,7 @@ export default class App {
       new Background({ img: document.querySelector("#bg1-img"), speed: -4 }),
     ];
 
+    this.walls = [new Wall({ type: "BIG" })];
     // addEventListener 에서 bind(this) 를 안하면 window 로 this가 바인딩 됨. App으로 바인딩 유지되도록
     window.addEventListener("resize", this.resize.bind(this));
   }
@@ -44,6 +46,11 @@ export default class App {
       this.backgrounds.forEach((background) => {
         background.update();
         background.draw();
+      });
+
+      this.walls.forEach((wall) => {
+        wall.update();
+        wall.draw();
       });
 
       then = now - (delta % App.interval);
