@@ -14,7 +14,7 @@ export default class Dot {
     // 무게
     this.mass = 1;
   }
-  update() {
+  update(mouse) {
     // 해당 위치에 draw 하고 고정해 놓기
     if (this.pinned) return;
 
@@ -27,6 +27,21 @@ export default class Dot {
     vel.add(this.gravity);
     // console.log(vel);
     this.pos.add(vel);
+
+    let { x: dx, y: dy } = Vector.sub(mouse.pos, this.pos);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > mouse.radius) return;
+
+    const direction = new Vector(dx / dist, dy / dist);
+
+    const force = (mouse.radius - dist) / mouse.radius;
+
+    // 마우스가 거의 근접했을때 움직이지 않도록 (딱 달라붙어 있도록)
+    if (force > 0.8) {
+      this.pos.setXY(mouse.pos.x, mouse.pos.y);
+    } else {
+      this.pos.add(direction.mult(force).mult(5));
+    }
   }
   draw(ctx) {
     ctx.fillStyle = "#000";
