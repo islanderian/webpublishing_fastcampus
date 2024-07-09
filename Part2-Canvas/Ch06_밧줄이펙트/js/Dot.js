@@ -7,8 +7,17 @@ export default class Dot {
 
     this.gravity = new Vector(0, 1);
     this.friction = 0.97;
+
+    // 고정해 놓으려는 객체
+    this.pinned = false;
+
+    // 무게
+    this.mass = 1;
   }
   update() {
+    // 해당 위치에 draw 하고 고정해 놓기
+    if (this.pinned) return;
+
     // 한 프레임 당 속도 (velocity)
     let vel = Vector.sub(this.pos, this.oldPos);
 
@@ -16,7 +25,7 @@ export default class Dot {
     this.oldPos.setXY(this.pos.x, this.pos.y);
     vel.mult(this.friction);
     vel.add(this.gravity);
-    console.log(vel);
+    // console.log(vel);
     this.pos.add(vel);
   }
   draw(ctx) {
