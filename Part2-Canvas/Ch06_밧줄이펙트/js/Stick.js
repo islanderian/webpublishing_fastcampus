@@ -6,8 +6,8 @@ export default class Stick {
     // 시작점과 끝점 사이 선의 길이
     this.length = this.startPoint.pos.dist(this.endPoint.pos);
 
-    // 고무줄처럼 돌아가려는 힘
-    this.tension = 0.05;
+    // 고무줄처럼 돌아가려는 힘 (낮을 수로 쫀득해짐, 1에 가까울 수록 딱딱)
+    this.tension = 0.3;
   }
   update() {
     const dx = this.endPoint.pos.x - this.startPoint.pos.x;
