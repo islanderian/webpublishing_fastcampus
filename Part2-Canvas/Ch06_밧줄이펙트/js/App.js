@@ -2,6 +2,7 @@ import Dot from "./Dot.js";
 import Mouse from "./Mouse.js";
 import Rope from "./Rope.js";
 import Stick from "./Stick.js";
+import { randomNumBetween } from "./utils.js";
 
 export default class App {
   static width = innerWidth;
@@ -26,9 +27,10 @@ export default class App {
       y: 100,
     });
 
-    rope_1.pin(0);
+    // rope_1.pin(0);
 
-    this.ropes.push(rope_1);
+    // this.ropes.push(rope_1);
+    this.initRopes();
   }
   resize() {
     App.width = innerWidth;
@@ -40,7 +42,26 @@ export default class App {
     this.canvas.width = App.width * App.dpr;
     this.canvas.height = App.height * App.dpr;
     this.ctx.scale(App.dpr, App.dpr);
+
+    this.initRopes();
   }
+
+  initRopes() {
+    this.ropes = [];
+    const TOTAL = App.width * 0.06;
+
+    for (let i = 0; i < TOTAL; i++) {
+      const rope = new Rope({
+        x: randomNumBetween(App.width * 0.3, App.width * 0.7),
+        y: 0,
+        gap: randomNumBetween(App.height * 0.05, App.height * 0.08),
+      });
+
+      rope.pin(0);
+      this.ropes.push(rope);
+    }
+  }
+
   render() {
     let now, delta;
     let then = Date.now();

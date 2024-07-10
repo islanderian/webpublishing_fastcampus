@@ -19,6 +19,17 @@ export default class Rope {
     this.dots[index].pinned = true;
   }
 
+  // 일정 이상 당겨지면 Rope 가 뽑히는 이펙트
+  checkPullingOut() {
+    // 실제로 늘어난 길이
+    const dist = this.dots[0].pos.dist(this.dots[1].pos);
+
+    // 늘어난 길이와 원래 길이의 비율이 1.2 보다 커지면
+    if (dist / this.sticks[0].length > 1.2) {
+      this.dots[0].pinned = false;
+    }
+  }
+
   create() {
     for (let i = 0; i < this.segments; i++) {
       this.dots.push(new Dot(this.x, this.y + i * this.gap));
@@ -29,6 +40,8 @@ export default class Rope {
   }
 
   update(mouse) {
+    this.checkPullingOut();
+
     this.dots.forEach((dot) => {
       dot.update(mouse);
     });
@@ -48,5 +61,8 @@ export default class Rope {
     this.sticks.forEach((stick) => {
       stick.draw(ctx);
     });
+
+    // Rope 끝에만 growing 이미지 넣기
+    this.dots[this.dots.length - 1].drawLight(ctx);
   }
 }
