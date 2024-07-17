@@ -1,7 +1,74 @@
 @import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&family=Noto+Sans+KR:wght@100..900&display=swap");
 
 html,
 body {
+  --color-boder: #938f87;
+  --color-bg: #c7c2b8;
+  --color-text: #1b1b19;
+
+  --border01: 1px solid var(--color-boder);
+  --border02: 6px double var(--color-boder);
+
+  font-family: "Fjalla One", "Noto Sans KR", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+
+  overflow-x: hidden;
+}
+
+.app {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-1 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-1 > header {
+  height: 8rem;
   box-sizing: border-box;
-  border: 1px solid red;
+  border-bottom: var(--border01);
+  display: flex;
+  justify-content: space-between;
+}
+.section-1 > header > h1 {
+  font-size: 5rem;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+.section-1 > header > ul {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+}
+.section-1 > main {
+  flex-grow: 1;
+  padding: 1rem 0;
+  display: flex;
+}
+.section-1 > main > div {
+  box-sizing: border-box;
+  border: var(--border02);
+  flex-grow: 1;
+}
+
+.section-2 {
+  background-color: var(--color-text);
+  margin: 1rem 0;
+  padding: 2rem 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  letter-spacing: -0.5;
 }
